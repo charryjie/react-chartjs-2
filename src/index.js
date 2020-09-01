@@ -209,11 +209,7 @@ class ChartComponent extends React.Component {
 
       if (current && current.type === next.type && next.data) {
         // Be robust to no data. Relevant for other update mechanisms as in chartjs-plugin-streaming.
-        // The data array must be edited in place. As chart.js adds listeners to it.
-        current.data.splice(next.data.length);
-        next.data.forEach((point, pid) => {
-          current.data[pid] = next.data[pid];
-        });
+        current.data = next.data
         const { data, ...otherProps } = next;
         // Merge properties. Notice a weakness here. If a property is removed
         // from next, it will be retained by current and never disappears.
